@@ -12,7 +12,19 @@ module DataAnon
             updates[database_field_name] = strategy.anonymize(field)
           end
         end
-        record.update_columns(updates) if updates.any?
+        if updates.any?
+          if bulk_process?
+            record.assign_attributes(updates)
+            collect_for_bulk_process(record)
+          else
+            record.update_columns(updates)
+          end
+        end
+      end
+
+      def bulk_store(records)
+        columns = @fields.keys
+        source_table.import @primary_keys + columns, records, validate: false, on_duplicate_key_update: columns
       end
 
     end

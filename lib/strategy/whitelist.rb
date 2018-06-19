@@ -19,9 +19,17 @@ module DataAnon
         @primary_keys.each do |key|
           dest_record[key] = record[key]
         end
-        dest_record.save!
+        if bulk_process?
+          collect_for_bulk_process(dest_record)
+        else
+          dest_record.save!
+        end
       end
 
+      def bulk_store(records)
+        columns = source_table.column_names
+        source_table.import @primary_keys + columns, records, validate: false, on_duplicate_key_update: columns
+      end
 
     end
   end
