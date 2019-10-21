@@ -3,6 +3,7 @@ require 'parallel'
 module DataAnon
   module Parallel
     class Table
+      include Utils::Logging
 
       def anonymize tables
         ::Parallel.each(tables) do |table|
