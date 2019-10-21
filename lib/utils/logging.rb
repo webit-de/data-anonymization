@@ -5,14 +5,22 @@ module DataAnon
   module Utils
     module Logging
 
-      def logger
+      def self.logger
         @@utils_logger ||= (self.logger = Logger.new(STDOUT) )
       end
 
-      def logger= logger
+      def self.logger= logger
         @@utils_logger = logger
         ActiveRecord::Base.logger = logger
         @@utils_logger
+      end
+
+      def logger
+        ::DataAnon::Utils::Logging.logger
+      end
+
+      def logger= logger
+        ::DataAnon::Utils::Logging.logger = logger
       end
 
     end
