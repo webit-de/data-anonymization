@@ -62,6 +62,8 @@ module DataAnon
     end
 
     class Sequential
+      include Utils::Logging
+
       def anonymize tables
         tables.each do |table|
           begin
