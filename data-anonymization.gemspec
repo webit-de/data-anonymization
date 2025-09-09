@@ -26,5 +26,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency('powerbar', '~> 2.0')
   gem.add_dependency('rgeo', '~> 2.4.0')
   gem.add_dependency('rgeo-geojson', '~> 2.1.1')
-  gem.add_dependency('thor', '~> 1.2.1')
+  gem.add_dependency('thor', '~> 1.4.0')
 end
